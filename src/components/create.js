@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 export class Create extends React.Component {
 
@@ -54,7 +55,23 @@ export class Create extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        alert("Car: " + this.state.Name + " " + this.state.CarType + " " + this.state.Reg + " " + this.state.Date + " " + this.state.Picture)
+        alert("Car: " + this.state.Name + " " + this.state.CarType + " " 
+        + this.state.Reg + " " + this.state.Date + " " + this.state.Picture)
+
+        const newCar = {
+            name: this.state.Name,
+            carType: this.state.CarType,
+            reg: this.state.Reg,
+            date: this.state.Date,
+            picture: this.state.Picture
+        }
+        axios.post('http://localhost:4000/api/cars', newCar )
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
     }
 
     render() {
