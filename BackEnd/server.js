@@ -72,7 +72,7 @@ app.get('/api/cars', (req, res) => {
     })
   
 })
-
+// get request , reads data
 app.get('/api/cars/:id' , (req,res)=> {
     console.log(req.params.id);
 
@@ -80,6 +80,18 @@ app.get('/api/cars/:id' , (req,res)=> {
         res.json(data);
     })
 })
+
+// delete function server side
+app.delete('/api/cars/:id', function (req, res) {
+    console.log(req.params.id);
+  
+    CarModel.deleteOne({ _id: req.params.id },
+      function (err, data) {
+      if (err)
+      res.send(err);
+      res.send(data);
+    })
+  })
 
 // post method used for user to enter data into the form and send to the database 
 app.post('/api/cars', (req, res)=> {

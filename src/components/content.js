@@ -8,7 +8,7 @@ export class Content extends React.Component {
     render(){
         return(
             
-
+          // Added a react bootstrap carousel to the homepage of my react app adding ectra features
             <div>
                 <Carousel>
   <Carousel.Item>

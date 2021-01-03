@@ -1,7 +1,27 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 export class CarItem extends React.Component {
+
+    constructor(){
+        super();
+
+        this.DeleteCar = this.DeleteCar.bind(this);
+    }
+    // delete car method using axios
+    // using arrow function
+    DeleteCar(e){
+        e.preventDefault();
+        console.log("Delete: " + this.props.car._id);
+
+        axios.delete("http://localhost:4000/api/cars/" + this.props.car._id)
+        .then(()=>{
+            this.props.ReloadData();
+        })
+        .catch();
+    }
 
     render() {
         return (
@@ -19,6 +39,7 @@ export class CarItem extends React.Component {
                             </footer>
                         </blockquote>
                     </Card.Body>
+                    <Button variant="danger" onClick={this.DeleteCar}>Delete</Button>
                 </Card>
 
             </div>
