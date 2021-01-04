@@ -4,6 +4,7 @@ const port = 4000
 const cors = require('cors');
 const bodyParser=  require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -25,6 +26,11 @@ res.header("Access-Control-Allow-Headers",
 "Origin, X-Requested-With, Content-Type, Accept");
 next();
 });
+
+
+// finding build folder and static folder
+app.use(express.static(path.join(__dirname, '../build')));
+app.use('/static', express.static(path.join(__dirname, 'build//static')));
 
 const Schema = mongoose.Schema;
 
@@ -122,6 +128,10 @@ app.post('/api/cars', (req, res)=> {
     })
 
     res.send('Car Added');
+})
+
+app.get('*', (req,res)=>{
+    res.sendFile(path.join(__dirname+'/../build/index.html'));
 })
 
 app.listen(port, () => {
