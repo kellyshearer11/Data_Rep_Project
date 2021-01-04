@@ -80,6 +80,17 @@ app.get('/api/cars/:id' , (req,res)=> {
         res.json(data);
     })
 })
+// put method that finds id and updates it
+app.put('/api/cars/:id' , (req, res)=>{
+    console.log("Update car: " + req.params.id);
+    console.log(req.body);
+
+    CarModel.findByIdAndUpdate(req.params.id,req.body, {new:true},
+        (err,data)=>{
+            res.send(data);
+        })
+
+})
 
 // delete function server side
 app.delete('/api/cars/:id', function (req, res) {

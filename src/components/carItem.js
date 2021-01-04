@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export class CarItem extends React.Component {
 
@@ -39,6 +40,7 @@ export class CarItem extends React.Component {
                             </footer>
                         </blockquote>
                     </Card.Body>
+                    <Link to={"/edit/" + this.props.car._id} className="btn btn-primary">Edit</Link>
                     <Button variant="danger" onClick={this.DeleteCar}>Delete</Button>
                 </Card>
 
