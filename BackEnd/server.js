@@ -130,6 +130,7 @@ app.post('/api/cars', (req, res)=> {
     res.send('Car Added');
 })
 
+// testing the single page application
 app.get('*', (req,res)=>{
     res.sendFile(path.join(__dirname+'/../build/index.html'));
 })

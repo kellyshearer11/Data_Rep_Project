@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './project.css'
 
 export class Edit extends React.Component {
 
@@ -24,26 +25,26 @@ export class Edit extends React.Component {
     }
     // edit component added to change a field of a car entered on the server
     componentDidMount() {
-       console.log(this.props.match.params.id);
+        console.log(this.props.match.params.id);
 
-         axios.get('http://localhost:4000/api/cars/'+this.props.match.params.id)
-        .then(response => {
-             this.setState({
-                _id: response.data._id,
-                Name: response.data.name,
-                CarType: response.data.carType,
-                Reg: response.data.reg,
-                Date: response.data.date,
-                Picture: response.data.picture
+        axios.get('http://localhost:4000/api/cars/' + this.props.match.params.id)
+            .then(response => {
+                this.setState({
+                    _id: response.data._id,
+                    Name: response.data.name,
+                    CarType: response.data.carType,
+                    Reg: response.data.reg,
+                    Date: response.data.date,
+                    Picture: response.data.picture
+                })
+
             })
 
-            })
-        
-            .catch((error) =>{
+            .catch((error) => {
                 console.log(error);
-                })                
+            })
     }
-// Here are all the methods used to input data into the form
+    // Here are all the methods used to input data into the form
     onChangeName(e) {
         this.setState({
             Name: e.target.value
@@ -76,8 +77,8 @@ export class Edit extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        alert("Car: " + this.state.Name + " " + this.state.CarType + " " 
-        + this.state.Reg + " " + this.state.Date + " " + this.state.Picture)
+        alert("Car: " + this.state.Name + " " + this.state.CarType + " "
+            + this.state.Reg + " " + this.state.Date + " " + this.state.Picture)
 
         const newCar = {
             name: this.state.Name,
@@ -85,20 +86,22 @@ export class Edit extends React.Component {
             reg: this.state.Reg,
             date: this.state.Date,
             picture: this.state.Picture,
-            _id:this.state._id
+            _id: this.state._id
         }
         // using axios and the put method to update changes to the field 
-        axios.put('http://localhost:4000/api/cars/'+this.state._id, newCar)
-        .then(res => console.log(res.data));
+        axios.put('http://localhost:4000/api/cars/' + this.state._id, newCar)
+            .then(res => console.log(res.data));
     }
 
-    
+
 
     render() {
         return (
-            <div className='App'>
+            <div className='App' id="edit">
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
+                        <h1> Edit Booking Details </h1>
+                        <br></br>
                         <label>Add Car Owner Name:  </label>
                         <input type='text'
                             className='form-control'
@@ -139,6 +142,7 @@ export class Edit extends React.Component {
                         <input type='submit'
                             value='Edit Car'
                             className='btn btn-primary'></input>
+                        <br></br>
                     </div>
                 </form>
             </div>
